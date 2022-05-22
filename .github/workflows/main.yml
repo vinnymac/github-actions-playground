@@ -1,6 +1,11 @@
 on:
-  release:
-    types: [published]
+  pull_request:
+    # Sequence of patterns matched against refs/heads
+    branches:
+      - main
+      - 'feature/**'
+      - 'chore/**'
+      - 'bug/**'
 jobs:
   trigger-circleci:
     runs-on: ubuntu-latest
