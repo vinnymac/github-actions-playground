@@ -37,7 +37,7 @@ jobs:
     steps:
       - name: trigger_circleci
         id: step1
-        uses: vinnymac/trigger-circleci-pipeline-action@v1.0.4
+        uses: vinnymac/trigger-circleci-pipeline-action@v1.0.5
         with:
           GHA_Meta: '{"logLevel":"${{ github.event.inputs.logLevel }}"}'
         env:
