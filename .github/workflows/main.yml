@@ -6,6 +6,31 @@ on:
       - 'feature/**'
       - 'chore/**'
       - 'bug/**'
+
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'
+        required: true
+        default: 'warning'
+        type: choice
+        options:
+        - info
+        - warning
+        - debug
+      print_tags:
+        description: 'True to print to STDOUT'
+        required: true
+        type: boolean
+      tags:
+        description: 'Test scenario tags'
+        required: true
+        type: string
+      environment:
+        description: 'Environment to run tests against'
+        type: environment
+        required: true
+
 jobs:
   trigger-circleci:
     runs-on: ubuntu-latest
@@ -13,5 +38,7 @@ jobs:
       - name: trigger_circleci
         id: step1
         uses: vinnymac/trigger-circleci-pipeline-action@v1.0.4
+        with:
+          GHA_Meta: "{\"logLevel\":\"${{ github.event.inputs.logLevel }}\"}"
         env:
           CCI_TOKEN: ${{ secrets.CCI_TOKEN }}
