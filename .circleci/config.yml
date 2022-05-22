@@ -1,0 +1,23 @@
+version: 2.1
+orbs:
+  node: circleci/node@5.0.2
+
+parameters:
+  logLevel:
+    type: string
+    description: "Log verbosity"
+    default: ""
+
+jobs:
+  test:
+    executor: node/default
+    steps:
+      - run:
+          command: echo "Log Level - << pipeline.parameters.logLevel >>"
+          name: Run tests
+
+workflows:
+  test_workfow:
+    when: << pipeline.parameters.logLevel >>
+    jobs:
+      - test
